@@ -24,63 +24,46 @@ export class Box extends Block {
     }
 
     draw(ctx) {
-        ctx.fillStyle = 'blue';
-        ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height)
         super.draw(ctx)
     }
 }
 
-export class Triangle extends Block {
+
+export class SmallSlopedBox1 extends Block {
+    constructor({ pos, size, value }) {
+        super({ pos, size, value })
+        
+        this.m = (1 / 2) * (this.value == 2 ? 1 : -1)
+        this.c = 0;
+
+        this.offsetY = Math.abs (this.pos.y) - (Math.abs (this.pos.x) * this.m) + this.c
+    }
+    
+    draw(ctx) {
+        super.draw(ctx)
+    }
+}
+
+export class SmallSlopedBox2 extends Block {
+    constructor({ pos, size, value }) {
+        super({ pos, size, value })
+        this.m = (1 / 2) * (this.value == 3 ? 1 : -1)
+        this.c = this.height * m;
+    }
+    draw(ctx) {
+        super.draw(ctx)
+    }
+}
+
+export class SlopedBox extends Block {
     constructor({pos, size, value}){
         super({ pos, size, value })
-        this.pos 
+
+        this.m = 1 * (this.value == 4 ? 1 : -1);
+        this.c = 0;
     }
 
     draw(ctx){
-        ctx.beginPath();
-        ctx.moveTo(this.pos.x, this.pos.y + this.height);
-        ctx.lineTo(this.pos.x + this.width, this.pos.y);
-        ctx.lineTo(this.pos.x + this.width, this.pos.y + this.height);
-        ctx.closePath();
-        ctx.fillStyle = 'green';
-        ctx.fill();
         super.draw (ctx)
-    }
-}
-
-export class SmallTriangle extends Block {
-    constructor({ pos, size, value }) {
-        super({ pos, size, value })
-        this.height /= 2
-        this.pos.y += this.height;
-
-    }
-
-    draw(ctx) {
-        ctx.beginPath();
-        ctx.moveTo(this.pos.x, this.pos.y + this.height);
-        ctx.lineTo(this.pos.x + this.width, this.pos.y);
-        ctx.lineTo(this.pos.x + this.width, this.pos.y + this.height); 
-        ctx.closePath();
-        ctx.fillStyle = 'purple';
-        ctx.fill();
-        super.draw(ctx)
-    }
-}
-
-export class Trapezoid extends Block {
-    constructor({ pos, size, value }) {
-        super({ pos, size, value })
-    }
-    draw(ctx) {
-        ctx.beginPath();
-        ctx.moveTo(this.pos.x, this.pos.y + this.height / 2);
-        ctx.lineTo(this.pos.x + this.width, this.pos.y)
-        ctx.lineTo(this.pos.x + this.width, this.pos.y+this.height);
-        ctx.lineTo(this.pos.x, this.pos.y + this.height);
-        ctx.fillStyle = 'orange';
-        ctx.closePath();
-        ctx.fill();
-        super.draw(ctx)
     }
 }

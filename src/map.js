@@ -1,4 +1,4 @@
-import {Box, Triangle, SmallTriangle, Trapezoid} from './Block.js'
+import { Box, SlopedBox, SmallSlopedBox1, SmallSlopedBox2 } from './Block.js'
 const size = 16;
 
 
@@ -48,7 +48,7 @@ Array.prototype.createObjectFrom2D = function (size) {
                         })
                         break;
                     case 2:
-                        block = new SmallTriangle({
+                        block = new SmallSlopedBox1({
                             pos: {
                                 x: x * size,
                                 y: y * size,
@@ -59,7 +59,7 @@ Array.prototype.createObjectFrom2D = function (size) {
                         })
                         break;
                     case 3:
-                        block = new Trapezoid ({
+                        block = new SmallSlopedBox2 ({
                             pos: {
                                 x: x * size,
                                 y: y * size,
@@ -70,7 +70,7 @@ Array.prototype.createObjectFrom2D = function (size) {
                         })
                         break;
                     case 4:
-                        block = new Triangle({
+                        block = new SlopedBox({
                             pos: {
                                 x: x * size,
                                 y: y * size,
@@ -80,6 +80,41 @@ Array.prototype.createObjectFrom2D = function (size) {
 
                         })
                         break;
+                    
+                    case 5:
+                        block = new SmallSlopedBox1({
+                            pos: {
+                                x: x * size,
+                                y: y * size,
+                            },
+                            size,
+                            value
+
+                        })
+                        break;
+                    case 6:
+                        block = new SmallSlopedBox2({
+                            pos: {
+                                x: x * size,
+                                y: y * size,
+                            },
+                            size,
+                            value
+
+                        })
+                        break;
+                    case 7:
+                        block = new SlopedBox({
+                            pos: {
+                                x: x * size,
+                                y: y * size,
+                            },
+                            size,
+                            value
+
+                        })
+                        break;
+                    
                     default:
                         block = new Box({
                             pos: {
