@@ -1,13 +1,14 @@
 import Sprite from "./Sprite.js";
-import { Box, SlopedBox, SmallSlopedBox1, SmallSlopedBox2 } from "./Block.js";
+import  Block from "./Block.js";
 
 export default class Player extends Sprite {
-    constructor({ pos, size, spriteSrc, animations }) {
+    constructor({ pos, size, spriteSrc, animations, canvas }) {
         super({ pos, size, spriteSrc, animations });
         this.vel = {
             x: 0,
             y: 0,
         }
+        this.canvas = canvas
     }
 
     applyGravity(gravity) {
@@ -26,9 +27,23 @@ export default class Player extends Sprite {
 
     checkVerticalCollision(blocks) {
         blocks.forEach(block => {
-
-
             if (this.checkCollision(block)) {
+                let m = 0;
+                let c = 0;
+                if (block.value !== '#') {
+                    if (block.value[0] === '/') {
+                        m = 1/ block.value[1]
+                        c = m * block.value[2] * block.height
+                    } else {
+                        m = -1/block.value[1]
+                        c = -m * block.value[2] * block.height
+                    }
+                    // console.log ('m ',m, ' c ',c)
+                    let offsetY = Math.abs (this.pos.y * Math.abs(this.pos.x * m) + c) - this.canvas.height 
+                    console.log (offsetY)
+                    
+                }
+
                 if (this.vel.y > 0) {
                     this.pos.y = block.pos.y - this.height -1;
                     this.vel.y = 0;
@@ -43,12 +58,9 @@ export default class Player extends Sprite {
 
     checkHorizontalCollision(blocks) {
         blocks.forEach(block => {
-
-
-            
-
             if (this.checkCollision(block)) {
 
+                if (block.value !== '#') return
                 
                 if (this.vel.x > 0) {
                    

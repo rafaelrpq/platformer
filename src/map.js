@@ -1,4 +1,4 @@
-import { Box, SlopedBox, SmallSlopedBox1, SmallSlopedBox2 } from './Block.js'
+import Block from './Block.js'
 const size = 16;
 
 
@@ -30,7 +30,7 @@ Array.prototype.parse2D = function (len) {
 
 Array.prototype.createObjectFrom2D = function (size) {
     const blocks = [];
-    let block;
+    let value = '#'
     this.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value != 0) {
@@ -38,97 +38,38 @@ Array.prototype.createObjectFrom2D = function (size) {
 
                 switch (value) {
                     case 1:
-                        block = new Box({
-                            pos: {
-                                x: x * size,
-                                y: y * size,
-                            },
-                            size,
-                            value
-                        })
+                        value = '#';
                         break;
                     case 2:
-                        block = new SmallSlopedBox1({
-                            pos: {
-                                x: x * size,
-                                y: y * size,
-                            },
-                            size,
-                            value
-
-                        })
+                        value = '/20';
                         break;
                     case 3:
-                        block = new SmallSlopedBox2 ({
-                            pos: {
-                                x: x * size,
-                                y: y * size,
-                            },
-                            size,
-                            value
-
-                        })
+                        value = '/21';
                         break;
                     case 4:
-                        block = new SlopedBox({
-                            pos: {
-                                x: x * size,
-                                y: y * size,
-                            },
-                            size,
-                            value
-
-                        })
+                        value = '/10';
                         break;
-                    
                     case 5:
-                        block = new SmallSlopedBox1({
-                            pos: {
-                                x: x * size,
-                                y: y * size,
-                            },
-                            size,
-                            value
-
-                        })
+                        value = '\\20'.toString();
                         break;
                     case 6:
-                        block = new SmallSlopedBox2({
-                            pos: {
-                                x: x * size,
-                                y: y * size,
-                            },
-                            size,
-                            value
-
-                        })
+                        value = '\\21';
                         break;
                     case 7:
-                        block = new SlopedBox({
-                            pos: {
-                                x: x * size,
-                                y: y * size,
-                            },
-                            size,
-                            value
-
-                        })
-                        break;
-                    
-                    default:
-                        block = new Box({
-                            pos: {
-                                x: x * size,
-                                y: y * size,
-                            },
-                            size,
-                            value
-
-                        })
+                        value = '\\10';
                         break;
                 }
 
-                blocks.push(block)
+                blocks.push (
+                    new Block({
+                        pos: {
+                            x: x * size,
+                            y: y * size,
+                        },
+                        size,
+                        value
+                    })
+                )
             }
         })
     })
