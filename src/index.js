@@ -51,12 +51,12 @@ const animations = {
 
 const player = new Player ({
     pos : {
-        x : canvas.width/2 - 16,
+        x : 8,
         y : 0
     },
     size: {
         height: 32,
-        width: 16
+        width: 8
     },
     // spriteSrc : '../res/player.png',
     animations,
@@ -64,7 +64,7 @@ const player = new Player ({
 })
 
 function playerHandler() {
-    let xVel = 3;
+    let xVel = 1;
     if (input.keys.LEFT) {
         player.vel.x = -xVel
     } else if (input.keys.RIGHT) {
@@ -87,14 +87,16 @@ console.log (blocks)
 const cenario = new Image()
 cenario.src = '../res/cenario.png'
 
-const gravity = .4;
+const gravity = .5;
 
 function render () {
     Game.loop = requestAnimationFrame (render)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.drawImage(cenario, 0, 0)
 
-    ctx.fillText (player.vel.y,20, 20)
+    ctx.fillText ('bottom ' + player.pos.y + player.height,20, 20)
+    ctx.fillText ('x '+player.pos.x+' y '+player.pos.y,20, 40)
+    ctx.fillText ('vx '+player.vel.x +' vy ' + player.vel.y,20, 60)
 
     blocks.forEach(block => block.draw(ctx))
 

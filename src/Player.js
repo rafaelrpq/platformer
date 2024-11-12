@@ -25,23 +25,60 @@ export default class Player extends Sprite {
         );
     }
 
+    // checkSlopeCollision(block) {
+    //     // Calcula o coeficiente angular (m)
+    //     const m = -(block.height/ block.value[1]) / (block.width); 
+      
+    //     console.log (block.value, m)
+    //     // Calcula o coeficiente linear (c)
+    //     const c = block.pos.y - m * block.pos.x;
+      
+    //     // Posição x do ponto de referência do sprite
+    //     const spriteX = this.pos.x + this.width / 2;
+      
+    //     // Calcula a coordenada y da reta na posição x do sprite
+    //     const slopeY = m * spriteX + c;
+      
+    //     // Posição y do ponto de referência do sprite
+    //     const spriteY = this.pos.y + this.height;
+      
+    //     // Detecta a colisão
+    //     if (spriteY > slopeY) {
+    //       // Colisão detectada
+      
+    //       // Calcula a diferença entre as coordenadas y
+    //       const differenceY = spriteY - slopeY;
+      
+    //       // Ajusta a posição y do sprite (fração = 1 neste exemplo)
+    //       this.pos.y -= differenceY;
+      
+    //       // Impede o movimento vertical do sprite
+    //       this.vel.y = 0;
+    //     }
+    //   }
+
     checkVerticalCollision(blocks) {
         blocks.forEach(block => {
             if (this.checkCollision(block)) {
-                let m = 0;
-                let c = 0;
+
                 if (block.value !== '#') {
-                    if (block.value[0] === '/') {
-                        m = 1/ block.value[1]
-                        c = m * block.value[2] * block.height
-                    } else {
-                        m = -1/block.value[1]
-                        c = -m * block.value[2] * block.height
-                    }
-                    // console.log ('m ',m, ' c ',c)
-                    let offsetY = Math.abs (this.pos.y * Math.abs(this.pos.x * m) + c) - this.canvas.height 
-                    console.log (offsetY)
+                    let ang = this.vel.x > 0 ? 1 : -1;
+
+                    let m =  (1 / block.value[1]); 
+                    let c = block.height -( m * block.height * block.value[2])
+
+                    let center = this.pos.x + this.width / 2;
+
+                    let offsetX = block.pos.x - center;
                     
+
+                    this.pos.y += offsetX;
+                    this.vel.y = 0;
+                    
+
+                    console.log (block.value, m, c, offsetX)
+
+                    return
                 }
 
                 if (this.vel.y > 0) {
@@ -85,6 +122,6 @@ export default class Player extends Sprite {
         this.checkHorizontalCollision(blocks)
         this.applyGravity(gravity)
         this.checkVerticalCollision(blocks)
-
+        
     }
 }

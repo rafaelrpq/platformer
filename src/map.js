@@ -50,10 +50,10 @@ Array.prototype.createObjectFrom2D = function (size) {
                         value = '/10';
                         break;
                     case 5:
-                        value = '\\20'.toString();
+                        value = '\\21'.toString();
                         break;
                     case 6:
-                        value = '\\21';
+                        value = '\\20';
                         break;
                     case 7:
                         value = '\\10';
