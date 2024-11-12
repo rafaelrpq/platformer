@@ -14,6 +14,6 @@ export default class Block {
     draw(ctx) {
         ctx.fillStyle = 'red';
         ctx.font = '1rem open sans'
-        ctx.fillText(this.value[0], this.pos.x+this.width/4, this.pos.y + this.height/1.125)
+        // ctx.fillText(this.value[0], this.pos.x+this.width/4, this.pos.y + this.height/1.125)
     }
 }

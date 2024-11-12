@@ -55,7 +55,7 @@ const player = new Player ({
         y : 0
     },
     size: {
-        height: 32,
+        height: 8,
         width: 8
     },
     // spriteSrc : '../res/player.png',
