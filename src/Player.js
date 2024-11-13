@@ -34,26 +34,29 @@ export default class Player extends Sprite {
                 if (block.value !== '#') {
 
                     let m = (1 / block.value[1]);                   
-                    let c = m * block.height * block.value[2]
-                    
-
-                    let center = this.pos.x + this.width / 2;
-
-                    let offsetX = block.pos.x - center;
-                    
-                    let check = m * center + c
-
-                    if (this.pos.y + this.height <= check) {
-                        this.pos.y = block.pos.y - block.height/2 - offsetX;
-                        this.vel.y = 0;
-                        
-    
-                        console.log(`value ${block.value}, m ${m}, c ${c}, offset ${offsetX}`);
-    
-                        return
-
+                    let c = block.value[2] * block.height * m ;        
+                                      
+                    if (block.value[0] === '/') {
+                        m = -m
+                        c = this.height - c
                     }
 
+                    let center = this.pos.x + this.width / 2;
+                    
+                    let offsetX = block.pos.x - center;
+                    
+                    let offsetY = m * (center) + c
+
+                    console.log(`value ${block.value}, m ${m}, c ${c}, offset [${offsetX}, ${offsetY}]`);
+                    
+                    if (this.pos.y + this.height <= offsetY) {
+                    
+                        this.pos.y = block.pos.y - block.height/2 - offsetX;
+                        this.vel.y = 0;      
+                    
+                        return
+                    }
+                
                 }
 
                 if (this.vel.y > 0) {
