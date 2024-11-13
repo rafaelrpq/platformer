@@ -64,7 +64,7 @@ const player = new Player ({
 })
 
 function playerHandler() {
-    let xVel = 1;
+    let xVel = 0.5;
     if (input.keys.LEFT) {
         player.vel.x = -xVel
     } else if (input.keys.RIGHT) {
@@ -94,7 +94,7 @@ function render () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.drawImage(cenario, 0, 0)
 
-    ctx.fillText ('bottom ' + player.pos.y + player.height,20, 20)
+    ctx.fillText ('bottom ' + (player.pos.y + player.height),20, 20)
     ctx.fillText ('x '+player.pos.x+' y '+player.pos.y,20, 40)
     ctx.fillText ('vx '+player.vel.x +' vy ' + player.vel.y,20, 60)
 

@@ -32,12 +32,10 @@ export default class Player extends Sprite {
             if (this.checkCollision(block)) {
 
                 if (block.value !== '#') {
-                    // let ang = this.vel.x > 0 ? 1 : -1;
 
-                    let m =  (1 / block.value[1]); 
-                    let c = block.height - (m * block.height * block.value[2])
-                    // let c = block.pos.y - (m * block.pos.x)
-
+                    let m = (1 / block.value[1]);                   
+                    let c = m * block.height * block.value[2]
+                    
 
                     let center = this.pos.x + this.width / 2;
 
@@ -50,7 +48,7 @@ export default class Player extends Sprite {
                         this.vel.y = 0;
                         
     
-                        console.log (block.value, m, c, offsetX)
+                        console.log(`value ${block.value}, m ${m}, c ${c}, offset ${offsetX}`);
     
                         return
 
