@@ -60,7 +60,6 @@ const player = new Player ({
     },
     // spriteSrc : '../res/player.png',
     animations,
-    canvas
 })
 
 function playerHandler() {

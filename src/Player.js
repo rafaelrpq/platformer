@@ -2,13 +2,12 @@ import Sprite from "./Sprite.js";
 import Block from "./Block.js";
 
 export default class Player extends Sprite {
-    constructor({ pos, size, spriteSrc, animations, canvas }) {
-        super({ pos, size, spriteSrc, animations });
+    constructor ({ pos, size, spriteSrc, animations}) {
+        super ({ pos, size, spriteSrc, animations });
         this.vel = {
             x: 0,
             y: 0,
         }
-        this.canvas = canvas
     }
 
     applyGravity(gravity) {
@@ -16,7 +15,7 @@ export default class Player extends Sprite {
         this.vel.y += gravity;
     }
 
-    checkCollision(block) {
+    checkCollision (block) {
         return (
             this.pos.x < block.pos.x + block.width &&
             this.pos.x + this.width > block.pos.x &&
@@ -26,19 +25,19 @@ export default class Player extends Sprite {
     }
 
 
-    collideSlope(block) {
-        let m = 1 / parseInt(block.value.substring(0, 2))
-        let c = parseInt(block.value[2]) * block.height * m
+    collideSlope (block) {
+        let m = 1 / parseInt (block.value.substring(0, 2))
+        let c = parseInt (block.value[2]) * block.height * m;
         
-        let ratio = this.height / this.width
+        let ratio = this.height / this.width;
         
         if (m < 0) {
-            this.pos.y = block.pos.y - (this.height / ratio) + c - (this.pos.x + this.width - block.pos.x) * Math.abs(m);
+            this.pos.y = block.pos.y - (this.height / ratio) + c - (this.pos.x + this.width - block.pos.x) * Math.abs(m); 
         } else {
-            this.pos.y = block.pos.y - (this.height / ratio) + c - (block.height - (this.pos.x - block.pos.x) * Math.abs(m))
+            this.pos.y = block.pos.y - (this.height / ratio) + c - (block.height - (this.pos.x - block.pos.x) * Math.abs(m));
         }
         
-        this.vel.y = 0
+        this.vel.y = 0;
         
         return;
 
@@ -46,8 +45,8 @@ export default class Player extends Sprite {
 
 
     checkVerticalCollision(blocks) {
-        blocks.forEach(block => {
-            if (this.checkCollision(block)) {
+        blocks.forEach (block => {
+            if (this.checkCollision (block)) {
 
                 if (block.value === '#') {
                     if (this.vel.y > 0) {
@@ -63,7 +62,7 @@ export default class Player extends Sprite {
                     return
                 }
 
-                this.collideSlope(block)
+                this.collideSlope (block)
             }
         });
     }
@@ -92,14 +91,11 @@ export default class Player extends Sprite {
     }
 
 
-    move(gravity, blocks) {
+    move (gravity, blocks) {
         this.pos.x += this.vel.x;
-        // this.pos.y += this.vel.y;
 
-
-        this.checkHorizontalCollision(blocks)
-        this.applyGravity(gravity)
-        this.checkVerticalCollision(blocks)
-
+        this.checkHorizontalCollision (blocks)
+        this.applyGravity (gravity)
+        this.checkVerticalCollision (blocks)
     }
 }
