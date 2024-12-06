@@ -16,11 +16,11 @@ const map = [
         0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 1, 1, 5, 6, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 5, 6, 0, 0, 0,
-        1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+        1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 
     ]
-    
-    
+
+
 Array.prototype.parse2D = function (len) {
     const rows = [];
     for (let i = 0; i < this.length; i += len) {
@@ -35,29 +35,29 @@ Array.prototype.createObjectFrom2D = function (size) {
     this.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value != 0) {
-               
+
 
                 switch (value) {
                     case 1:
                         value = '#';
                         break;
                     case 2:
-                        value = '/20';
+                        value = '-20';
                         break;
                     case 3:
-                        value = '/21';
+                        value = '-21';
                         break;
                     case 4:
-                        value = '/10';
+                        value = '-10';
                         break;
                     case 5:
-                        value = '\\21';
+                        value = '+20';
                         break;
                     case 6:
-                        value = '\\20';
+                        value = '+21';
                         break;
                     case 7:
-                        value = '\\10';
+                        value = '+10';
                         break;
                 }
 
@@ -79,7 +79,4 @@ Array.prototype.createObjectFrom2D = function (size) {
 
 let level = []
 
-export default level = map.parse2D(20).createObjectFrom2D(size); 
-
-
-
+export default level = map.parse2D(20).createObjectFrom2D(size);

@@ -2,8 +2,8 @@ import Sprite from "./Sprite.js";
 import  Block from "./Block.js";
 
 export default class Player extends Sprite {
-    constructor({ pos, size, spriteSrc, animations, canvas }) {
-        super({ pos, size, spriteSrc, animations });
+    constructor ({ pos, size, spriteSrc, animations, canvas }) {
+        super ({ pos, size, spriteSrc, animations });
         this.vel = {
             x: 0,
             y: 0,
@@ -11,12 +11,12 @@ export default class Player extends Sprite {
         this.canvas = canvas
     }
 
-    applyGravity(gravity) {
+    applyGravity (gravity) {
         this.pos.y += this.vel.y + gravity;
         this.vel.y += gravity;
     }
 
-    checkCollision(block) {
+    checkCollision (block) {
         return (
                 this.pos.x < block.pos.x + block.width &&
                 this.pos.x + this.width > block.pos.x &&
@@ -33,30 +33,32 @@ export default class Player extends Sprite {
 
                 if (block.value !== '#') {
 
-                    let m = (1 / block.value[1]);                   
-                    let c = block.value[2] * block.height * m ;        
-                                      
-                    if (block.value[0] === '/') {
-                        m = -m
-                        c = this.height - c
+                    if (block.value.substring(1) === '20') {
+                        block.height = 8
+                        console.log (block.pos.y, block.height)
                     }
+
+                    let m = (1 / block.value[1]);                   
+                    let c = m * block.height * block.value[2]
 
                     let center = this.pos.x + this.width / 2;
-                    
-                    let offsetX = block.pos.x - center;
-                    
-                    let offsetY = m * (center) + c
 
-                    console.log(`value ${block.value}, m ${m}, c ${c}, offset [${offsetX}, ${offsetY}]`);
+                    // let offsetX = block.pos.x - center;
+                    let offsetX = block.pos.x - this.pos.x;
                     
-                    if (this.pos.y + this.height <= offsetY) {
+                    let check = m * center + c
+                    console.log(`value ${block.value}, check ${check}, m ${m}, c ${c}, offset ${offsetX}`);
                     
-                        this.pos.y = block.pos.y - block.height/2 - offsetX;
-                        this.vel.y = 0;      
-                    
+                    if (this.pos.y + this.height/2 < check) {
+                        this.pos.y = block.pos.y - m * block.height/2 - offsetX;
+                        this.vel.y = 0;
+                        
+    
+    
                         return
+
                     }
-                
+
                 }
 
                 if (this.vel.y > 0) {
@@ -71,14 +73,14 @@ export default class Player extends Sprite {
         })
     }
 
-    
 
-    checkHorizontalCollision(blocks) {
-        blocks.forEach(block => {
-            if (this.checkCollision(block)) {
+
+    checkHorizontalCollision (blocks) {
+        blocks.forEach (block => {
+            if (this.checkCollision (block)) {
 
                 if (block.value !== '#') return
-                
+
                 if (this.vel.x > 0) {
                     this.pos.x = block.pos.x - this.width;
                     this.vel.x = 0;
@@ -89,18 +91,20 @@ export default class Player extends Sprite {
                     this.vel.x = 0;
                 }
 
-               
+
             }
         })
     }
 
 
-    move(gravity, blocks) {
+    move (gravity, blocks) {
         this.pos.x += this.vel.x;
+        // this.pos.y += this.vel.y;
 
-        this.checkHorizontalCollision(blocks)
-        this.applyGravity(gravity)
-        this.checkVerticalCollision(blocks)
-        
+
+        this.checkHorizontalCollision (blocks)
+        this.applyGravity (gravity)
+        this.checkVerticalCollision (blocks)
+
     }
 }

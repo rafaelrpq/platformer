@@ -75,8 +75,12 @@ function playerHandler() {
 
     if (input.keys.UP) {
         player.vel.y = -5
-
     }
+    // else if (input.keys.DOWN) {
+    //     player.vel.y = 5
+    // } else {
+    //     player.vel.y = 0
+    // }
 }
 
 input.handler = playerHandler;
@@ -94,9 +98,9 @@ function render () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.drawImage(cenario, 0, 0)
 
-    ctx.fillText ('bottom ' + (player.pos.y + player.height),20, 20)
-    ctx.fillText ('x '+player.pos.x+' y '+player.pos.y,20, 40)
-    ctx.fillText ('vx '+player.vel.x +' vy ' + player.vel.y,20, 60)
+    // ctx.fillText ('bottom ' + (player.pos.y + player.height),20, 20)
+    // ctx.fillText ('x '+player.pos.x+' y '+player.pos.y,20, 40)
+    // ctx.fillText ('vx '+player.vel.x +' vy ' + player.vel.y,20, 60)
 
     blocks.forEach(block => block.draw(ctx))
 
