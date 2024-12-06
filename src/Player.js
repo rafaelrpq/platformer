@@ -30,19 +30,13 @@ export default class Player extends Sprite {
         let m = 1 / parseInt(block.value.substring(0, 2))
         let c = parseInt(block.value[2]) * block.height * m
 
-        if (m > 0) c = block.height + c
+        if (m > 0) c =  c - block.height
 
-        // let line = (this.pos.x % block.width) * m + c
+        let ratio = this.height / this.width
 
-        // let offsetY = (this.pos.y % block.height) - line
+        console.log (ratio)
 
-        // console.log(m, c, line, offsetY)
-
-
-
-
-
-        this.pos.y = block.pos.y - ((this.pos.x - block.pos.x) * Math.abs(m))
+        this.pos.y = block.pos.y - (this.height/ratio)*1.5 + c - ((this.pos.x - block.pos.x) * Math.abs(m))
         this.vel.y = 0
         return;
 

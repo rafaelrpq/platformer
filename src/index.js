@@ -55,8 +55,8 @@ const player = new Player ({
         y : 0
     },
     size: {
-        height: 8,
-        width: 8
+        height: 32,
+        width: 16
     },
     // spriteSrc : '../res/player.png',
     animations,
@@ -64,7 +64,7 @@ const player = new Player ({
 })
 
 function playerHandler() {
-    let xVel = 0.5;
+    let xVel = 1;
     if (input.keys.LEFT) {
         player.vel.x = -xVel
     } else if (input.keys.RIGHT) {
